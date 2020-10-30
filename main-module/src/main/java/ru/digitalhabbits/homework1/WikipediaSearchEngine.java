@@ -22,7 +22,7 @@ public class WikipediaSearchEngine {
 
         // 1. сделать запрос в wikipedia, получить результат в формате json.
         final WikipediaClient client = new WikipediaClient();
-        final String text = client.search(searchString);
+        final String text = client.search(searchString).toLowerCase();
 
         // 2. очистить папку с результатами
         final FileEngine fileEngine = new FileEngine();
@@ -35,7 +35,7 @@ public class WikipediaSearchEngine {
 
         // 4. выполнить действия над результатом и записать в файл
         final PluginEngine pluginEngine = new PluginEngine();
-        for (Class<? extends PluginInterface> plugin: plugins) {
+        for (Class<? extends PluginInterface> plugin : plugins) {
             final String result = pluginEngine.applyPlugin(plugin, text);
 
             final String pluginName = plugin.getSimpleName();

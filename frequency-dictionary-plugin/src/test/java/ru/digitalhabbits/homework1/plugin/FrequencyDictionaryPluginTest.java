@@ -25,10 +25,11 @@ class FrequencyDictionaryPluginTest {
     @MethodSource("testDataGenerator")
     void apply(TestDataHolder testData) {
         final String result = plugin.apply(testData.getText());
+
         assertNotNull(result);
 
         final Map<String, Integer> wordFrequency = testData.getFrequency();
-        for (String line: result.split("\n")) {
+        for (String line : result.split("\n")) {
             final Pair<String, Integer> data = splitLine(line);
             final Integer frequency = wordFrequency.get(data.getKey());
             assertEquals(frequency, data.getValue(),
